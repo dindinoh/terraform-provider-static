@@ -16,12 +16,17 @@ func resourceServer() *schema.Resource {
 				Type:     schema.TypeString,
 				Required: true,
 			},
+			"increment": &schema.Schema{
+				Type:     schema.TypeString,
+				Required: true,
+			},
 		},
 	}
 }
 
 func resourceServerCreate(d *schema.ResourceData, m interface{}) error {
 	address := d.Get("address").(string)
+	d.Set("increment", d.Get("increment").(string))
 	d.SetId(address)
 	d.SetConnInfo(map[string]string{
 		"type": "ssh",

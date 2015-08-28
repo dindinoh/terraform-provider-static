@@ -2,6 +2,7 @@ provider "static_server" {}
 
 resource "static_server" "server1-run1" {
 	address = "test.server.com"
+	increment = "1"
 	connection {
 		type = "ssh"
 		user = "username"
@@ -17,6 +18,7 @@ resource "static_server" "server1-run1" {
 
 resource "static_server" "server2-run1" {
 	address = "test.server.com"
+	increment = "2"
 	connection {
 		type = "ssh"
 		user = "username"

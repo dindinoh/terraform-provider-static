@@ -7,15 +7,11 @@ import (
 func resourceServer() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceServerCreate,
-		Read:   resourceServerRead,
+		// Read:   resourceServerRead,
 		Update: resourceServerUpdate,
-		Delete: resourceServerDelete,
+		// Delete: resourceServerDelete,
 
 		Schema: map[string]*schema.Schema{
-			"name": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
-			},
 			"address": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
@@ -25,21 +21,23 @@ func resourceServer() *schema.Resource {
 }
 
 func resourceServerCreate(d *schema.ResourceData, m interface{}) error {
-	name := d.Get("name").(string)
-	d.SetId(name + "!")
 	address := d.Get("address").(string)
-	d.SetId(address + "!")
+	d.SetId(address)
+	d.SetConnInfo(map[string]string{
+		"type": "ssh",
+		"host": address,
+	})
 	return nil
 }
 
-func resourceServerRead(d *schema.ResourceData, m interface{}) error {
-	return nil
-}
+// func resourceServerRead(d *schema.ResourceData, m interface{}) error {
+// 	return nil
+// }
 
 func resourceServerUpdate(d *schema.ResourceData, m interface{}) error {
 	return nil
 }
 
-func resourceServerDelete(d *schema.ResourceData, m interface{}) error {
-	return nil
-}
+// func resourceServerDelete(d *schema.ResourceData, m interface{}) error {
+// 	return nil
+//}

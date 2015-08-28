@@ -2,3 +2,6 @@ terraform-provider-static
 test.tf
 *.sh
 *tfstate*
+id_rsa
+*key*
+crash.log

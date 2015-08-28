@@ -16,7 +16,6 @@ func resourceServer() *schema.Resource {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-
 			"address": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
@@ -26,6 +25,10 @@ func resourceServer() *schema.Resource {
 }
 
 func resourceServerCreate(d *schema.ResourceData, m interface{}) error {
+	name := d.Get("name").(string)
+	d.SetId(name + "!")
+	address := d.Get("address").(string)
+	d.SetId(address + "!")
 	return nil
 }
 

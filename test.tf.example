@@ -1,6 +1,6 @@
 provider "static_server" {}	
 
-resource "static_server" "server1" {
+resource "static_server" "server1-run1" {
 	address = "test.server.com"
 	connection {
 		type = "ssh"
@@ -15,7 +15,7 @@ resource "static_server" "server1" {
 	}
 }
 
-resource "static_server" "server2" {
+resource "static_server" "server2-run1" {
 	address = "test.server.com"
 	connection {
 		type = "ssh"

@@ -8,6 +8,8 @@ import (
 //Provider is good
 func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
-		ResourcesMap: map[string]*schema.Resource{},
+		ResourcesMap: map[string]*schema.Resource{
+			"static_server": resourceServer(),
+		},
 	}
 }

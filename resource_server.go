@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/hashicorp/terraform/helper/schema"
+	"log"
 )
 
 func resourceServer() *schema.Resource {
@@ -32,6 +33,9 @@ func resourceServerCreate(d *schema.ResourceData, m interface{}) error {
 		"type": "ssh",
 		"host": address,
 	})
+	log.Printf("[DEBUG] :::::::::::::::::::::::::: ")
+	log.Printf("%+v\n", d)
+	log.Printf("[DEBUG] :::::::::::::::::::::::::: ")
 	return nil
 }
 

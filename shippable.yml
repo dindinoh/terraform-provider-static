@@ -17,15 +17,15 @@ before_install:
 
 install:
   - go get -d -v ./... && go build -v ./...
-# Make folders for the reports
 
 before_script:
   - mkdir -p shippable/testresults
   - mkdir -p shippable/codecoverage
 
 script:
-  - go test -coverprofile=coverage.txt -covermode count ./
+  - go test -cover-coverprofile=coverage.txt -covermode count ./
   - $GOPATH/bin/gocover-cobertura < coverage.txt > shippable/codecoverage/coverage.xml
+  - go test -cover
   - go test -v | go-junit-report > shippable/testresults/junit.xml
 
 

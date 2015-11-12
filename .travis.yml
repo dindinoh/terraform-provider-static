@@ -3,5 +3,7 @@ language: go
 # version numbers
 go:
 - release
-script:
-./install-deps.sh;
+install:
+- go get github.com/hashicorp/terraform/plugin
+- go get github.com/hashicorp/terraform/terraform
+- go get github.com/hashicorp/terraform/helper/schema

@@ -2,7 +2,7 @@
 language: go
 # version
 go:
-- 1.5
+- tip
 # install deps
 install:
 - go get github.com/hashicorp/terraform/plugin
@@ -30,7 +30,7 @@ before_script:
 script:
   - go test -coverprofile=coverage.txt -covermode count ./
   - $GOPATH/bin/gocover-cobertura < coverage.txt > shippable/codecoverage/coverage.xml
-  
+
 notifications:
     email:
         - gusten@dindinoh.net

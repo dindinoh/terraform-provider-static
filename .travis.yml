@@ -8,3 +8,24 @@ install:
 - go get github.com/hashicorp/terraform/plugin
 - go get github.com/hashicorp/terraform/terraform
 - go get github.com/hashicorp/terraform/helper/schema
+env:
+  - CI_REPORT=shippable/testresults/junit.xml
+
+before_install:
+  - export GOPATH=$SHIPPABLE_GOPATH
+  - source $HOME/.gvm/scripts/gvm
+  - gvm install go$SHIPPABLE_GO_VERSION
+  - gvm use go$SHIPPABLE_GO_VERSION
+  - go get github.com/t-yuki/gocover-cobertura
+  - go get github.com/onsi/gomega
+  - go get github.com/onsi/ginkgo
+  - go get code.google.com/p/go.tools/cmd/cover
+
+# Make folders for the reports
+before_script:
+  - mkdir -p shippable/testresults
+  - mkdir -p shippable/codecoverage
+
+script:
+  - go test -coverprofile=coverage.txt -covermode count ./
+  - $GOPATH/bin/gocover-cobertura < coverage.txt > shippable/codecoverage/coverage.xml

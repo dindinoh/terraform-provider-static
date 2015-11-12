@@ -28,4 +28,6 @@ script:
   - go test -cover
   - go test -v | go-junit-report > shippable/testresults/junit.xml
 
-
+notifications:
+    email:
+        - gusten@dindinoh.net

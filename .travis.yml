@@ -1,2 +1,7 @@
-# script file
-script: ./build.sh
+# language setting
+language: go
+# version numbers
+go:
+- release
+script:
+./install-deps.sh

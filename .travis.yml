@@ -2,7 +2,7 @@
 language: go
 # version
 go:
-- tip
+- 1.5
 # install deps
 install:
 - go get github.com/hashicorp/terraform/plugin
@@ -12,6 +12,7 @@ env:
   - CI_REPORT=shippable/testresults/junit.xml
 
 before_install:
+  - export SHIPPABLE_GO_VERSION="tip"
   - export GOPATH=$SHIPPABLE_GOPATH
   - source $HOME/.gvm/scripts/gvm
   - gvm install go$SHIPPABLE_GO_VERSION

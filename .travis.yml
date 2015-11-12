@@ -13,12 +13,19 @@ before_install:
   - go get github.com/t-yuki/gocover-cobertura
   - go get github.com/onsi/gomega
   - go get github.com/onsi/ginkgo
+  - go get github.com/jstemmer/go-junit-report
 
 install:
   - go get -d -v ./... && go build -v ./...
+# Make folders for the reports
+
+before_script:
+  - mkdir -p shippable/testresults
+  - mkdir -p shippable/codecoverage
 
 script:
   - go test -coverprofile=coverage.txt -covermode count ./
   - $GOPATH/bin/gocover-cobertura < coverage.txt > shippable/codecoverage/coverage.xml
+  - go test -v | go-junit-report > shippable/testresults/junit.xml
 
 

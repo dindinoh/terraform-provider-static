@@ -1,0 +1,31 @@
+language: go
+
+go:
+  - 1.4
+
+before_install:
+  - source $HOME/.gvm/scripts/gvm;
+  - if [[ $SHIPPABLE_GO_VERSION == "tip" ]]; then gvm install tip; gvm use tip; fi
+  - if [[ $SHIPPABLE_GO_VERSION == *release* ]]; then gvm install release; gvm use release; fi
+  - if [[ $SHIPPABLE_GO_VERSION =~ [0-9].[0-9] ]]; then gvm install go$SHIPPABLE_GO_VERSION; gvm use go$SHIPPABLE_GO_VERSION; fi
+  - export GOPATH=$SHIPPABLE_GOPATH
+  - go get golang.org/x/tools/cmd/cover
+  - go get github.com/t-yuki/gocover-cobertura
+  - go get github.com/onsi/gomega
+  - go get github.com/onsi/ginkgo
+  - go get github.com/jstemmer/go-junit-report
+
+install:
+  - go get -d -v ./... && go build -v ./...
+# Make folders for the reports
+
+before_script:
+  - mkdir -p shippable/testresults
+  - mkdir -p shippable/codecoverage
+
+script:
+  - go test -coverprofile=coverage.txt -covermode count ./
+  - $GOPATH/bin/gocover-cobertura < coverage.txt > shippable/codecoverage/coverage.xml
+  - go test -v | go-junit-report > shippable/testresults/junit.xml
+
+

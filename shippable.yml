@@ -23,7 +23,7 @@ before_script:
   - mkdir -p shippable/codecoverage
 
 script:
-  - go test -cover-coverprofile=coverage.txt -covermode count ./
+  - go test -cover -coverprofile=coverage.txt -covermode count ./
   - $GOPATH/bin/gocover-cobertura < coverage.txt > shippable/codecoverage/coverage.xml
   - go test -cover
   - go test -v | go-junit-report > shippable/testresults/junit.xml

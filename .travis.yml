@@ -2,7 +2,7 @@
 language: go
 # version numbers
 go:
-- release
+- tip
 install:
 - go get github.com/hashicorp/terraform/plugin
 - go get github.com/hashicorp/terraform/terraform

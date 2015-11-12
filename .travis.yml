@@ -1,8 +1,9 @@
 # language setting
 language: go
-# version numbers
+# version
 go:
 - tip
+# install deps
 install:
 - go get github.com/hashicorp/terraform/plugin
 - go get github.com/hashicorp/terraform/terraform
